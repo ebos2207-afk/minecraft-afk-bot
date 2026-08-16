@@ -1,16 +1,23 @@
 const bedrock = require('bedrock-protocol');
+const http = require('http');
 
+// 🟢 THIS PART KEEPS IT ON THE FREE TIER BY TALKING TO RENDER
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot is running 24/7!\n');
+}).listen(process.env.PORT || 10000);
+
+// 🎮 MINECRAFT BOT CONNECTION
 const client = bedrock.createClient({
   host: process.env.MC_HOST || 'your.server.ip', 
-  port: parseInt(process.env.MC_PORT) || 19132, // Bedrock default port is 19132
+  port: parseInt(process.env.MC_PORT) || 19132, 
   username: process.env.MC_USERNAME || 'BedrockAFKBot',
-  offline: true // Set to false if you are joining a server requiring formal Xbox Live login
+  offline: true 
 });
 
 client.on('join', () => {
   console.log('✅ Bedrock Bot successfully joined the server!');
   
-  // Anti-AFK chat trigger to keep entity session active
   setInterval(() => {
     client.queue('text', {
       type: 'chat',
