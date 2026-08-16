@@ -11,8 +11,8 @@ http.createServer((req, res) => {
 const client = bedrock.createClient({
   host: process.env.MC_HOST || 'your.server.ip', 
   port: parseInt(process.env.MC_PORT) || 19132, 
-  username: process.env.MC_USERNAME || 'BedrockAFKBot',
-  offline: true 
+  username: username: process.env.MC_USERNAME || 'ebos2209@gmail.com'.
+  auth: 'microsoft'.
 });
 
 client.on('join', () => {
